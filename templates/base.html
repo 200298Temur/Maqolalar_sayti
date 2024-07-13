@@ -1,0 +1,59 @@
+{% load static %}
+{% load show_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link type="text/css" href="{% static 'css/style.css' %}" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar_container">
+        <nav class="navbar">
+        {% for m in menu %}
+            <a href="{% url m.url_name %}">{{m.title}}</a>
+        {% endfor %}
+        
+        </nav>
+        <div class="right_links">
+            {% if user.is_authenticated %}
+            <a href="{%url 'users:profile'%}">{{ user.username }}</a>
+            |
+            <a href="{% url 'users:logout' %}" id="logout-link">Chiqish</a>
+            <form id="logout-form" method="post" action="{% url 'users:logout' %}" style="display:none;">
+                {% csrf_token %}
+            </form>
+        {% else %}
+            <a href="{% url 'users:login' %}">Kirish</a>
+            
+            <a href="{% url 'users:register_signup'%}">Ro'yxatdan o'tish</a>
+        {% endif %}
+        </div>    
+    </nav>
+    <main class="content">
+        <div class="sidebar">
+            <ul>
+                {% if cat_selected == 0 %}
+                    <li>Kategoriyalar:</li>
+                {% else %}
+                    <li><a href="{% url 'home' %}">Kategoriyalar:</a></li>
+                {% endif %}
+            </ul>
+            {% show_categories cat_selected %}
+            <hr>
+            {%show_user_for_main cat_selected%}
+        </div>
+        <div class="main-content">            
+            <main>
+                {% block content %}{% endblock content %}
+            </main>
+        </div>
+        
+
+    </main>
+{% block navigation %}
+{% endblock %}
+</body>
+</html>

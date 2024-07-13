@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% csrf_token %}
+<h3>Chop etilgan maqolalar soni: {{  chop_etilgan_maqolalar }}</h3>
+<h3>Chop etilgan maqolalar soni: {{ rad_etilgan_maqolalar }}</h3>
+<h3>Umumiy maqolalar soni: {{ umumiy_maqolalar }}</h3>
+<hr>
+<br>
+<div class="articles">
+    {% for post in posts %}
+        <p>Category: {{post.cat}}</p>
+        {%if post.is_published%}
+            <div class="article">
+                <p ><a style="color:green" href="{% url 'post_update' post.slug%}">{{ post.title }}</a><br>Chop etildi</p>
+                <hr>
+            </div>
+        {%elif post.rejection%}
+            <div class="article">
+                <p ><a style="color:red" href="{% url 'post_update' post.slug%}">{{ post.title }}</a><br>Rad etildi</p>
+                <hr>
+            </div>
+        {%else%}
+            <div class="article">
+                <p ><a style="color:blue" href="{% url 'post_update' post.slug%}">{{ post.title }}</a><br>Ko`rib chiqlmoqda</p>
+                <hr>
+            </div>
+        {%endif%}
+        
+    {% endfor %}
+</div>
+{% endblock content %}
+
+
+
+

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+
+<form action="" method="post" enctype="multipart/form-data" class="custom-form">
+    {% csrf_token %}
+    {% comment %} <label for="{{ form.id_for_label }}" class="custom-label">{{ form.label }}: </label>
+    <p>{{ form.title }}</p>
+    <p>{{ form.content }}</p>
+    
+    <form>
+        <input type="radio" id="published" name="is_published" value="True">
+        <label for="published">Published</label><br>
+        <input type="radio" id="rejected" name="is_published" value="False">
+        <label for="rejected">Rejected</label><br>
+    </form>
+     {% endcomment %}
+     {{form.as_p}}
+    <p><button type="submit" class="custom-button">Save</button></p>
+</form>
+
+{% endblock content %}

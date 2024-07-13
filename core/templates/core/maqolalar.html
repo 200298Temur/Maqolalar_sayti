@@ -1,0 +1,103 @@
+{% load static %}
+{% load show_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link type="text/css" href="{% static 'css/style.css' %}" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar_container">
+        <nav class="navbar">
+        {% for m in menu %}
+            <a href="{% url m.url_name %}">{{m.title}}</a>
+        {% endfor %}
+        
+        </nav>
+        <div class="right_links">
+            {% if user.is_authenticated %}
+            <a href="{%url 'users:profile'%}">{{ user.username }}</a>
+            |
+            <a href="{% url 'users:logout' %}" id="logout-link">Chiqish</a>
+            <form id="logout-form" method="post" action="{% url 'users:logout' %}" style="display:none;">
+                {% csrf_token %}
+            </form>
+        {% else %}
+            <a href="{% url 'users:login' %}">Kirish</a>
+            <a href="{% url 'users:register'%}">Ro'yxatdan o'tish</a>
+        {% endif %}
+        </div>    
+    </nav>
+    <main class="content">
+        <div class="sidebar">
+            <ul>
+                {% if cat_selected == 0 %}
+                    <li>Kategoriyalar:</li>
+                {% else %}
+                    <li><a href="{% url 'home' %}">Kategoriyalar:</a></li>
+                {% endif %}
+            </ul>
+            {% show_categories cat_selected %}
+            <hr>
+            
+            {%show_user cat_selected%}
+        </div>
+        <div class="main-content">            
+            <main>
+               {% block content %}
+               {% for post in posts %}
+                           <div class="post">
+                               {%if post.is_published%}
+                               <h2 class="post-title"><a style="color:green" href="{% url 'update' post.slug%}">{{ post.title }}</a></h2>
+                               <p class="post-meta">
+                                    Data: {{ post.time_create|date:"Y-m-d" }} |
+                                    Author: {{ post.author.username }} | 
+                                    Category: {{post.cat}}
+                               </p> 
+                              
+                               {% elif post.rejection %} 
+                               <h2 class="post-title"><a style="color:red" href="{% url 'update' post.slug%}">{{ post.title }}</a></h2>
+                               <p class="post-meta">
+                                   Data: {{ post.time_create|date:"Y-m-d" }} |
+                                   Author: {{ post.author.username }} | 
+                                   Category: {{post.cat}}
+                              </p> 
+                               {% else %}     
+                               <h2 class="post-title"><a style="color:blue" href="{% url 'update' post.slug%}">{{ post.title }}</a></h2>
+                               <p class="post-meta">
+                                   Data: {{ post.time_create|date:"Y-m-d" }} |
+                                   Author: {{ post.author.username }} | 
+                                   Category: {{post.cat}}
+                              </p>     
+                               {% endif %}      
+                           </div>
+                       {% endfor %}
+               {% endblock content %}
+               
+            </main>
+        </div>
+    </main>
+    {% block navigation %}
+
+<footer style="font-size: 20px;">
+    <nav class="list-pages">
+        {% if page_obj.has_previous %}
+            <a style="color:white;" href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+        {% endif %}
+
+        {% for p in paginator.page_range %}
+            <a style="color:white;margin-left:5px;" href="?page={{ p }}">{{ p }}</a>
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a style="color:white;" href="?page={{ page_obj.next_page_number }}">&gt;</a>
+        {% endif %}
+    </nav>
+</footer>
+
+{% endblock %}
+</body>
+</html>

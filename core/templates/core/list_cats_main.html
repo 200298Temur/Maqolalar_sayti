@@ -1,0 +1,12 @@
+<!-- core/templates/core/list_cats_copy.html -->
+{% if users %}
+    <p style=" text-align: center;">Authorlar</p>
+        {% for user in users %}
+            {% if user.id == cat_selected %}
+                <li class="selected">{{ user.username }}</li>
+            {% else %}
+                <li><a href="{% url 'author_main' user.id %}">{{ user.username }}</a></li>
+            {% endif %}
+        {% endfor %}
+    
+{% endif %}

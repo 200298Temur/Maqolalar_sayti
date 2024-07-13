@@ -1,0 +1,172 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+}
+
+
+.content {
+    display: flex;
+    padding: 2rem;
+}
+
+.sidebar {
+    width: 20%;
+    background-color: #f0f0f0;
+    padding: 1rem;
+}
+
+.sidebar h2 {
+    margin-top: 5px;
+    text-align: center; /* Matn markaziyat qilinishi */
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #000;
+    
+}
+
+.sidebar ul li a:hover {
+    text-decoration: underline;
+}
+
+.main-content {
+    width: 75%;
+    padding: 1rem;
+}
+
+
+
+.navbar_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem; 
+    background-color: rgb(88, 9, 172);
+    flex-grow: 1;
+}
+
+/* .navbar {
+    display: flex;
+    flex-grow: 1;
+} */
+
+.right_links {
+    display: flex;
+}
+
+.right_links a {
+    color: #000; /* qora rang matn uchun */
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+}
+
+
+.right_links a:hover {
+    background-color: #87CEEB; /* to'qroq ko'k rang hover uchun */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.posts {
+    margin-top: 20px;
+}
+
+.post {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.post-title {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.post-meta {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.post-content {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.read-more {
+    font-size: 0.9em;
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+.post-date {
+    margin-right: 30px;
+}
+
+
+/* Add this to your CSS file, e.g., static/css/styles.css */
+
+
+/* ----------------- */
+footer {
+    box-sizing: border-box;
+    background: #d4d4d0;
+    padding: 20px; /* Adjusted padding for better spacing */
+    color: #aaa;
+    font-family: Verdana, Geneva, Arial, Helvetica;
+    text-align: center; /* Center align the footer content */
+}
+
+.list-pages {
+    display: flex; /* Use flexbox to align items in a single row */
+    justify-content: center; /* Center align the pagination links */
+    align-items: center; /* Vertically center the items */
+    gap: 20px; /* Space between the links */
+}
+
+

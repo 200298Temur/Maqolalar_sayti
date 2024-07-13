@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="posts">
+        {% for post in posts %}
+            <div class="post">
+                <h2 class="post-title">{{ post.title|linebreaks|truncatewords:20 }}</h2>
+                <p class="post-meta">
+                    Data: {{ post.time_create|date:"Y-m-d" }} |
+                     Author: {{ post.author.username }}
+                </p>
+                <p class="post-content">{{ post.content|linebreaks|truncatewords:30 }}</p>
+                <a href="{% url 'post' post.slug %}" class="read-more">Batafsil o'qish</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block navigation %}
+
+<footer style="font-size: 20px;">
+    <nav class="list-pages">
+        {% if page_obj.has_previous %}
+            <a style="color:white;" href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+        {% endif %}
+
+        {% for p in paginator.page_range %}
+            <a style="color:white;margin-left:5px;" href="?page={{ p }}">{{ p }}</a>
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a style="color:white;" href="?page={{ page_obj.next_page_number }}">&gt;</a>
+        {% endif %}
+    </nav>
+</footer>
+
+{% endblock %}

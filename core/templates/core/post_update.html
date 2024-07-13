@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="post">
+        <h2 class="post-title">{{ post.title }}</h2>
+        <p class="post-meta">
+            Date: {{ post.time_create|date:"Y-m-d" }} | 
+            Author: {{ post.author.username }} 
+        </p>
+        <div class="post-content">
+            {{ post.content }}
+        </div>
+    {% if post.message %}
+        <hr>
+        <p>Message: {{ post.message }}</p>
+        <hr>
+    {% endif %}
+
+    </div>
+</div>
+{% endblock content %}

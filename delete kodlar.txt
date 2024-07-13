@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% for post in posts %}
+            <div class="post">
+                {%if post.is_published%}
+                <h2 class="post-title"><a style="color:green" href="{% url 'update' post.slug%}">{{ post.title }}</a></h2>
+                <p class="post-meta">
+                     Data: {{ post.time_create|date:"Y-m-d" }} |
+                     Author: {{ post.author.username }}
+                </p> 
+                {% elif post.rejection %} 
+                <h2 class="post-title"><a style="color:red" href="{% url 'update' post.slug%}">{{ post.title }}</a></h2>
+                <p class="post-meta">
+                     Data: {{ post.time_create|date:"Y-m-d" }} |
+                     Author: {{ post.author.username }}
+                </p> 
+                {% else %}     
+                <h2 class="post-title"><a style="color:blue" href="{% url 'update' post.slug%}">{{ post.title }}</a></h2>
+                <p class="post-meta">
+                     Data: {{ post.time_create|date:"Y-m-d" }} |
+                     Author: {{ post.author.username }}
+                </p>    
+                {% endif %}      
+            </div>
+        {% endfor %}
+{% endblock content %}
+
+
